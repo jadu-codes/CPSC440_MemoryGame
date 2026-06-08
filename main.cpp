@@ -2,6 +2,8 @@
 #include <allegro5/allegro_primitives.h>
 #include "game.h"
 
+int mx, my;
+
 int main()
 {
     const int SCREEN_WIDTH = 600;
@@ -18,12 +20,10 @@ int main()
     if (!al_init())
         return -1;
 
+    al_install_mouse();
     al_init_primitives_addon();
 
-    display = al_create_display(
-        SCREEN_WIDTH,
-        SCREEN_HEIGHT
-    );
+    display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     if (!display)
         return -1;
@@ -31,15 +31,9 @@ int main()
     event_queue = al_create_event_queue();
     timer = al_create_timer(1.0 / FPS);
 
-    al_register_event_source(
-        event_queue,
-        al_get_display_event_source(display)
-    );
-
-    al_register_event_source(
-        event_queue,
-        al_get_timer_event_source(timer)
-    );
+    al_register_event_source(event_queue, al_get_display_event_source(display));
+    al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    al_register_event_source(event_queue, al_get_mouse_event_source());
 
     Game memoryGame;
 
@@ -60,16 +54,23 @@ int main()
             redraw = true;
         }
 
-        if (redraw &&
-            al_is_event_queue_empty(event_queue))
+        if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
+        {
+            mx = ev.mouse.x;
+            my = ev.mouse.y;
+
+            memoryGame.handleMouseClick(mx, my);
+            redraw = true;
+        }
+
+        if (redraw && al_is_event_queue_empty(event_queue))
         {
             redraw = false;
 
-            al_clear_to_color(
-                al_map_rgb(0, 0, 0)
-            );
+            al_clear_to_color(al_map_rgb(0, 0, 0));
 
             memoryGame.drawGrid();
+            memoryGame.drawRevealedBoxes();
 
             al_flip_display();
         }
