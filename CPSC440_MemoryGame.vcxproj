@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>allegro.lib;allegro_primitives.lib</AdditionalDependencies>
+      <AdditionalDependencies>allegro.lib;allegro_primitives.lib;allegro_font.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\JoelA\source\repos\CPSC440_MemoryGame\packages\Allegro.5.2.11.3\build\native\v145\x64\lib</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
