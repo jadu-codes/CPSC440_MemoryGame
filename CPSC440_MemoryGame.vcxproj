@@ -111,10 +111,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\JoelA\source\repos\CPSC440_MemoryGame\packages\Allegro.5.2.11.3\build\native\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>allegro.lib;allegro_primitives.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\JoelA\source\repos\CPSC440_MemoryGame\packages\Allegro.5.2.11.3\build\native\v145\x64\lib</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -147,7 +150,19 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="graphics.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\AllegroDeps.1.16.0\build\native\AllegroDeps.targets" Condition="Exists('packages\AllegroDeps.1.16.0\build\native\AllegroDeps.targets')" />
+    <Import Project="packages\Allegro.5.2.11.3\build\native\Allegro.targets" Condition="Exists('packages\Allegro.5.2.11.3\build\native\Allegro.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\AllegroDeps.1.16.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\AllegroDeps.1.16.0\build\native\AllegroDeps.targets'))" />
+    <Error Condition="!Exists('packages\Allegro.5.2.11.3\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Allegro.5.2.11.3\build\native\Allegro.targets'))" />
+  </Target>
 </Project>

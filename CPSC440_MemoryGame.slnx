@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="CPSC440_MemoryGame.vcxproj" />
+  <Project Path="CPSC440_MemoryGame.vcxproj" Id="3e6caf5b-e46a-4e02-b351-8b0b24e60a97" />
 </Solution>
